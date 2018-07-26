@@ -1,0 +1,11 @@
+*:80 *:443 {
+    # redirect to HTTPS
+    redir 301 {
+        if {scheme} not https
+        / https://{host}{uri}
+    }
+    proxy / http://nginx {
+        transparent
+    }
+    tls self_signed
+}
